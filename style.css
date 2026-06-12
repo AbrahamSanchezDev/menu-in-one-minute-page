@@ -1,10 +1,70 @@
-.caja img{
-    margin-left: 5%;
-    width: 90%;
-    object-fit: cover;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
-h1{
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+
+h1 {
+  text-align: center;
+  margin: 0;
+  padding: 15px 0;
+  box-sizing: border-box;
+}
+
+.caja {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  box-sizing: border-box;
+  padding: 0 15px 15px 15px;
+}
+
+/* ==========================================
+   LANDSCAPE MODE (Locked to single screen)
+   ========================================== */
+@media (orientation: landscape) {
+  /* Prevent scrolling in landscape so images fit perfectly */
+  html,
+  body {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  h1 {
+    height: 45px;
+  }
+
+  .caja {
+    flex-direction: row;
+    height: calc(100dvh - 45px); /* Responsive mobile height minus header */
+  }
+
+  .caja img {
+    width: calc(50% - 7.5px);
+    height: 100%;
+    object-fit: contain; /* Ensures images are fully visible without cropping */
+  }
+}
+
+/* ==========================================
+   PORTRAIT MODE (Scrollable mobile layout)
+   ========================================== */
+@media (orientation: portrait) {
+  /* Allow scrolling down naturally */
+  html,
+  body {
+    overflow-y: auto;
+  }
+
+  .caja {
+    flex-direction: column; /* Stack images vertically */
+    height: auto; /* Let the container grow as long as needed */
+  }
+
+  .caja img {
+    width: 100%; /* Take up 100% of the phone's width */
+    height: auto; /* Let the height adapt naturally based on the image proportions */
+    object-fit: img; /* No cropping, displays the full image width-wise */
+  }
 }
